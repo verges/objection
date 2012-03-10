@@ -1,13 +1,18 @@
-@class SingletonFoo;
+@class Car;
+@class OtherSingleton;
 
-@protocol BarProtocol
-@end
-
-@interface SingletonBar : NSObject <BarProtocol>
+@interface SingletonBar : NSObject
 {
-  SingletonFoo *foo;
+  OtherSingleton *foo;
+  Car *theCar;
 }
 
-@property(nonatomic, retain) SingletonFoo *foo;
+@property(nonatomic, retain) OtherSingleton *otherSingleton;
+@property (nonatomic, retain) Car *theCar;
 
+@end
+
+@interface OtherSingleton : NSObject
+@property (nonatomic, retain) Car *awokenCar;
+@property (nonatomic, retain) SingletonBar *bar;
 @end

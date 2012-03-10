@@ -11,11 +11,13 @@ describe(@"circular dependencies", ^{
   });
 
   it(@"are resolved between singletons", ^{
-    SingletonFoo *foo = [[JSObjection globalInjector] getObject:[SingletonFoo class]];
     SingletonBar *bar = [[JSObjection globalInjector] getObject:[SingletonBar class]];
+    OtherSingleton *otherSingleton = [[JSObjection globalInjector] getObject:[OtherSingleton class]];
 
-    assertThat(foo, is(sameInstance(bar.foo)));
-    assertThat(foo.bar, is(sameInstance(bar)));
+    assertThat(bar, is(sameInstance(otherSingleton.bar)));
+    assertThat(otherSingleton.bar, is(sameInstance(bar)));
+    assertThat(otherSingleton.awokenCar, is(notNilValue()));
+    assertThat(otherSingleton.awokenCar, is(sameInstance(bar.theCar)));
   });
 });
 
